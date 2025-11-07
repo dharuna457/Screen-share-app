@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Share Viewer - Web Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📱 Screen Share Viewer</h1>
+            <p class="subtitle">View Android screens from your browser</p>
+        </header>
+
+        <!-- PIN Input Section -->
+        <div id="pinSection" class="section">
+            <div class="card">
+                <h2>Connect to a Shared Screen</h2>
+                <p class="help-text">Enter the 6-digit PIN from the Android device</p>
+
+                <div class="pin-input-container">
+                    <input
+                        type="text"
+                        id="pinInput"
+                        placeholder="000000"
+                        maxlength="6"
+                        pattern="[0-9]*"
+                        inputmode="numeric"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <button id="connectBtn" class="btn btn-primary">
+                    <span class="btn-icon">🔗</span>
+                    Connect
+                </button>
+
+                <div id="statusMessage" class="status-message"></div>
+            </div>
+
+            <div class="info-card">
+                <h3>How to use:</h3>
+                <ol>
+                    <li>Open the Screen Share app on an Android device</li>
+                    <li>Tap "Share Screen" and note the 6-digit PIN</li>
+                    <li>Enter the PIN above and click Connect</li>
+                    <li>You'll be able to view and control the screen</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Video Display Section -->
+        <div id="videoSection" class="section" style="display: none;">
+            <div class="video-container">
+                <div class="video-header">
+                    <div class="connection-info">
+                        <span class="status-indicator connected"></span>
+                        <span id="connectionStatus">Connected</span>
+                        <span class="pin-display">PIN: <strong id="currentPin"></strong></span>
+                    </div>
+                    <button id="disconnectBtn" class="btn btn-disconnect">
+                        <span class="btn-icon">✕</span>
+                        Disconnect
+                    </button>
+                </div>
+
+                <div class="video-wrapper">
+                    <video id="remoteVideo" autoplay playsinline></video>
+                    <div id="videoOverlay" class="video-overlay">
+                        <div class="spinner"></div>
+                        <p>Establishing connection...</p>
+                    </div>
+                </div>
+
+                <div class="controls-panel">
+                    <div class="control-item">
+                        <input type="checkbox" id="enableMouseControl" checked>
+                        <label for="enableMouseControl">Enable Mouse Control</label>
+                    </div>
+                    <div class="control-info">
+                        <span class="info-icon">ℹ️</span>
+                        <span>Click on the video to control the remote device</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Panel -->
+        <div id="statsPanel" class="stats-panel" style="display: none;">
+            <h4>Connection Stats</h4>
+            <div class="stat-row">
+                <span>Connection State:</span>
+                <span id="iceState">-</span>
+            </div>
+            <div class="stat-row">
+                <span>Signaling State:</span>
+                <span id="signalingState">-</span>
+            </div>
+            <div class="stat-row">
+                <span>Video Resolution:</span>
+                <span id="videoResolution">-</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>Screen Share App • WebRTC Viewer</p>
+            <a href="/status" target="_blank">Server Status</a>
+        </footer>
+    </div>
+
+    <!-- Socket.IO Client -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- Main Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>

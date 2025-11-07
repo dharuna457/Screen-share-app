@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(wget:*)",
+      "Bash(./gradlew assembleDebug:*)",
+      "Bash(./gradlew clean:*)",
+      "Bash(adb logcat:*)",
+      "Bash(adb install:*)",
+      "Bash(adb shell:*)",
+      "Bash(adb devices:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
